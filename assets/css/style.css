@@ -14,18 +14,24 @@
 html {
     font-size: 62.5%;
     scroll-behavior: smooth;
+    scroll-padding-top: 65px; /* compensa o menu fixo ao clicar nos links */
 }
 
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 2rem;
     color: var(--primary-color);
+    overflow-x: hidden;
 }
 
 body p {
     line-height: 1.2;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
@@ -144,6 +150,28 @@ a {
     left: 25%;
 }
 
+/* Botão hambúrguer: escondido no desktop */
+.menu-toggle {
+    display: none;
+    flex-flow: column nowrap;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 4.8rem;
+    height: 4.8rem;
+    padding: 1.1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 0.3rem;
+    background: var(--primary-color);
+    transition: all 300ms ease-in-out;
+}
+
 .home-content {
     position: relative;
     top: -8rem;
@@ -230,7 +258,7 @@ a {
     flex-flow: column nowrap;
     justify-content: center;
     min-height: 100vh;
-    padding: 2.5rem;
+    padding: 3rem;
 }
 
 .grid-gallery .grid {
@@ -247,6 +275,8 @@ a {
 }
 
 .gallery-img img {
+    display: block;
+    width: 100%;
     transition: all 300ms ease-in-out;
 }
 
@@ -255,7 +285,7 @@ a {
 }
 
 .grid-gallery-description {
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
 }
 
 .responsive-table {
@@ -347,3 +377,177 @@ body .full-width {
     color: var(--light-gray-color);
 }
 
+/* ==========================================================
+   RESPONSIVO
+   ========================================================== */
+
+/* Tablets e telas médias */
+@media (max-width: 992px) {
+    :root {
+        --gap: 2.4rem;
+    }
+
+    h1 { font-size: 4.8rem; }
+    h2 { font-size: 4.2rem; }
+    h3 { font-size: 3.6rem; }
+
+    /* Home: texto em cima, imagem embaixo */
+    .home-content {
+        grid-template-columns: 1fr;
+        top: 0;
+        min-height: auto;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+
+    .home-text-content h2 {
+        font-size: clamp(3.2rem, 8vw, 6rem);
+        margin-bottom: 3rem;
+    }
+
+    /* Top 3 em coluna única */
+    .top3 .grid {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .top3-description {
+        padding-bottom: 4rem;
+    }
+
+    /* Galeria com 2 colunas */
+    .grid-gallery .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-img {
+        max-width: none;
+        max-height: none;
+    }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+    :root {
+        --gap: 2rem;
+    }
+
+    body {
+        font-size: 1.8rem;
+    }
+
+    h2 { font-size: clamp(2.8rem, 8vw, 3.6rem); }
+
+    /* Seções não precisam mais ocupar a tela inteira */
+    .section,
+    .intro-content,
+    .top3-content,
+    .grid-gallery-content {
+        min-height: auto;
+    }
+
+    .intro-content,
+    .top3-content,
+    .grid-gallery-content {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    /* Menu hambúrguer */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--white-color);
+        border-bottom: 0.1rem solid var(--light-gray-color);
+    }
+
+    .menu nav.open {
+        display: block;
+    }
+
+    .menu ul {
+        flex-direction: column;
+    }
+
+    .menu ul li a {
+        padding: 1.8rem var(--gap);
+        font-size: 1.8rem;
+    }
+
+    .menu ul li a::after {
+        display: none;
+    }
+
+    /* Botão vira "X" quando aberto */
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(0.9rem) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-0.9rem) rotate(-45deg);
+    }
+
+    /* Contato */
+    .contact-form .form-grid {
+        gap: 2rem;
+    }
+
+    .form-group {
+        flex: 1 1 100%;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        font-size: 1.8rem;
+    }
+
+    .form-group button {
+        width: 100%;
+        font-size: 1.8rem;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1.6rem;
+    }
+
+    .menu-content {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    .menu h1 {
+        font-size: 2rem;
+    }
+
+    /* Galeria em coluna única */
+    .grid-gallery .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .grid-gallery-content {
+        padding: 5rem 1.6rem;
+    }
+
+    .top3 .grid h3 {
+        font-size: 2.6rem;
+        padding-left: 4.4rem;
+    }
+
+    .top3 .grid h3::before {
+        font-size: 6.5rem;
+    }
+}

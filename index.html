@@ -16,7 +16,13 @@
                 <a href="#home">LOGO</a>
             </h1>
 
-            <nav>
+            <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-nav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="menu-nav">
                 <ul>
                     <li><a href="#intro">Intro</a></li>
                     <li><a href="#top3">Top 3</a></li>
@@ -99,22 +105,22 @@
 
             <div class="grid">
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/203/360/360.jpg?hmac=otexDvues0OqtNB0dvbbmD2HzeqizSLPU07nGje4ceY" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/203/360/360.jpg?hmac=otexDvues0OqtNB0dvbbmD2HzeqizSLPU07nGje4ceY" alt="random image" loading="lazy">
                 </div>
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/71/360/360.jpg?hmac=rzOIRqNIJTach8MH3I1FLE4hJgPH9njUjgCzav8s52M" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/71/360/360.jpg?hmac=rzOIRqNIJTach8MH3I1FLE4hJgPH9njUjgCzav8s52M" alt="random image" loading="lazy">
                 </div>
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/574/360/360.jpg?hmac=J8WGQNjwOBjPHzDmOenWK1SNKVKuCLtdTXRp1MXqsPs" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/574/360/360.jpg?hmac=J8WGQNjwOBjPHzDmOenWK1SNKVKuCLtdTXRp1MXqsPs" alt="random image" loading="lazy">
                 </div>
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/958/360/360.jpg?hmac=oTMUpqNZQzwcWOsmLti8pPgXUON_XgHx6EVm3vrRsNY" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/958/360/360.jpg?hmac=oTMUpqNZQzwcWOsmLti8pPgXUON_XgHx6EVm3vrRsNY" alt="random image" loading="lazy">
                 </div>
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/642/360/360.jpg?hmac=tNUVBuIe1RNxCCOk4WdYABILcDxmv1vnry8_2ENtdLA" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/642/360/360.jpg?hmac=tNUVBuIe1RNxCCOk4WdYABILcDxmv1vnry8_2ENtdLA" alt="random image" loading="lazy">
                 </div>
                 <div class="gallery-img">
-                    <img src="https://fastly.picsum.photos/id/58/360/360.jpg?hmac=R1NgPDU4fi1MIQy4jlH9PmoUTCKP4j1L8inHzhR9S_g" alt="random image">
+                    <img src="https://fastly.picsum.photos/id/58/360/360.jpg?hmac=R1NgPDU4fi1MIQy4jlH9PmoUTCKP4j1L8inHzhR9S_g" alt="random image" loading="lazy">
                 </div>
             </div>
         </div>
@@ -220,5 +226,25 @@
         </div>
     </section>
 
+    <script>
+        // Menu hambúrguer (mobile)
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menuNav = document.getElementById('menu-nav');
+
+        function setMenu(open) {
+            menuNav.classList.toggle('open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+            menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+        }
+
+        menuToggle.addEventListener('click', () => {
+            setMenu(!menuNav.classList.contains('open'));
+        });
+
+        // Fecha o menu ao clicar em um link
+        menuNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setMenu(false));
+        });
+    </script>
 </body>
 </html>
